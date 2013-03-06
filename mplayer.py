@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Copyright 2010-2013 Bing Sun <subi.the.dream.walker@gmail.com>
-# Time-stamp: <2013-01-26 10:25:20 by subi>
+# Time-stamp: <2013-03-07 02:56:03 by subi>
 #
 # mplayer-wrapper is an MPlayer frontend, trying to be a transparent interface.
 # It is convenient to rename the script to "mplayer" and place it in your $PATH
@@ -339,9 +339,8 @@ class MPlayerFifo(object):
         import atexit
 
         self.args = []
-        xdg = os.environ['XDG_RUNTIME_DIR']
-        if xdg:
-            self.__path = os.path.join(xdg, 'mplayer.fifo')
+        if 'XDG_RUNTIME_DIR' in os.environ and os.environ['XDG_RUNTIME_DIR']:
+            self.__path = os.path.join(os.environ['XDG_RUNTIME_DIR'], 'mplayer.fifo')
         else:
             import tempfile
             tmpdir = tempfile.mkdtemp()
